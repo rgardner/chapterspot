@@ -1,3 +1,10 @@
+#!/usr/bin/env python3
+"""
+usage: python chapterspot_minutes.py <minutes_url>
+
+Email all brothers with the minutes from chapter.
+
+"""
 import json
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException

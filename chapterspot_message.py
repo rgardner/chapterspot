@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-usage: python chapterspot_minutes.py <minutes_url>
+usage: python chapterspot_message.py <message>
 
-Email all brothers with the minutes from chapter.
+Email all brothers with the specified message.
 
 """
 import json
@@ -12,8 +12,8 @@ import sys
 
 IMPLICIT_WAIT_TIME = 10  # seconds
 
-assert len(sys.argv) == 2  # filename, file url
-minutes_url = sys.argv[1]
+assert len(sys.argv) == 2, "You must the message you would like to send."
+message = sys.argv[1]
 
 # Load in config settings.
 with open('config.json') as config_file:
@@ -32,11 +32,10 @@ password.send_keys(config["chapterspot"]["password"])
 login = driver.find_element_by_xpath("//*[contains(text(), 'Sign-In')]")
 login.click()
 
-MESSAGE = "Here are the minutes from today's chapter: {0}".format(minutes_url)
 assert 'Messages - ChapterSpot' in driver.title
 driver.find_element_by_class_name('dropdown-toggle_msgtype').click()
 driver.find_element_by_class_name('set-email').click()
-driver.find_element_by_id('mainContent').send_keys(MESSAGE)
+driver.find_element_by_id('mainContent').send_keys(message)
 driver.find_element_by_id('messagePost').click()
 
 exit_code = 0
